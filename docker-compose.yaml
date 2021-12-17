@@ -1,6 +1,15 @@
 version: "3"
 
 services:  
+  app:
+    build: .
+    container_name: gokafka
+    volumes:
+      - .:/go/src/
+    # allows communication with every container inside Docker's network, as long as the container has extra_hosts configured
+    # Important: you need to add the host below in the /etc/hosts file
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
